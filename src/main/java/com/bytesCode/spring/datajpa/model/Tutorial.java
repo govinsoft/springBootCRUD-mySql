@@ -10,13 +10,13 @@ public class Tutorial {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column(name = "title")
+	//@Column(name = "title")
 	private String title;
 
-	@Column(name = "description")
+	//@Column(name = "description")
 	private String description;
 
-	@Column(name = "published")
+	//@Column(name = "published")
 	private boolean published;
 
 	public Tutorial() {
