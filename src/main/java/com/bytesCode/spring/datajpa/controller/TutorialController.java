@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import com.bytesCode.spring.datajpa.model.Tutorial;
 import com.bytesCode.spring.datajpa.repository.TutorialRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class TutorialController {
-
+	private static final Logger LOGGER= LoggerFactory.getLogger(TutorialController.class);
 	@Autowired
 	TutorialRepository tutorialRepository;
 
@@ -32,7 +34,7 @@ public class TutorialController {
 	public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
 		try {
 			List<Tutorial> tutorials = new ArrayList<Tutorial>();
-
+			//LOGGER.info("Simple  get records ...  ");
 			if (title == null)
 				tutorialRepository.findAll().forEach(tutorials::add);
 			else
@@ -41,7 +43,7 @@ public class TutorialController {
 			if (tutorials.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-
+			//LOGGER.info("tutorials List ..."+tutorials);
 			return new ResponseEntity<>(tutorials, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -2,8 +2,17 @@ package com.bytesCode.spring.datajpa.model;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+ 
 @Entity
 @Table(name = "tutorials")
+//@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class Tutorial {
 
 	@Id
@@ -18,16 +27,15 @@ public class Tutorial {
 
 	//@Column(name = "published")
 	private boolean published;
-
-	public Tutorial() {
-
-	}
-
-	public Tutorial(String title, String description, boolean published) {
-		this.title = title;
-		this.description = description;
-		this.published = published;
-	}
+	/*
+	 * public Tutorial() {
+	 * 
+	 * }
+	 */
+	  public Tutorial(String title, String description, boolean published) {
+	  this.title = title; this.description = description; this.published =
+	  published; }
+	 
 
 	public long getId() {
 		return id;
@@ -57,9 +65,9 @@ public class Tutorial {
 		this.published = isPublished;
 	}
 
-	@Override
-	public String toString() {
-		return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
-	}
+	/*
+	 * @Override public String toString() { return "Tutorial [id=" + id + ", title="
+	 * + title + ", desc=" + description + ", published=" + published + "]"; }
+	 */
 
 }

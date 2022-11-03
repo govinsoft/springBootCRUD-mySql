@@ -1,5 +1,5 @@
 
-package com.bytecodes.spring.aop.api.advice;
+package com.bytesCode.spring.datajpa.advice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,34 +14,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAdvice {
 
-	Logger log = LoggerFactory.getLogger(LoggingAdvice.class);
-	
-	@Pointcut(value="execution(* com.bytecodes.spring.aop.api.*.*.*(..) )")
-	public void myPointcut() {
-		
-	}
-	
-	@Around("myPointcut()")
-	public Object applicationLogger(ProceedingJoinPoint pjp) throws Throwable {
+    Logger log = LoggerFactory.getLogger(LoggingAdvice.class);
 
- ObjectMapper mapper = new ObjectMapper();
-		String methodName = pjp.getSignature().getName();
-		String className = pjp.getTarget().getClass().toString();
-		Object[] array = pjp.getArgs();
-		log.info("method invoked " + className + " : " + methodName + "()" + "arguments : "
-				+ mapper.writeValueAsString(array));
-		Object object = pjp.proceed();
-		log.info(className + " : " + methodName + "()" + "Response : "
-				+ mapper.writeValueAsString(object));
-		return object;
+    @Pointcut(value = "execution(* com.bytesCode.spring.datajpa..*.*.*(..) )")
+    public void myFirstPointcut() {
 
+    }
 
+    @Around("myFirstPointcut()")
+    public Object applicationLogger(ProceedingJoinPoint pjp) throws Throwable {
+
+        ObjectMapper mapper = new ObjectMapper();
+        String methodName = pjp.getSignature().getName();
+        String className = pjp.getTarget().getClass().toString();
+        Object[] array = pjp.getArgs();
+        log.info("method invoked " + className + " : " + methodName + "()" + "arguments : "
+                + mapper.writeValueAsString(array));
+        Object object = pjp.proceed();
+        log.info(className + " : " + methodName + "()" + "Response : "
+                + mapper.writeValueAsString(object));
+        return object;
 
 
-
-
-
-	}
+    }
 
 }
 
